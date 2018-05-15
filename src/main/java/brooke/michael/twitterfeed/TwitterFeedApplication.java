@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TwitterfeedApplication {
+public class TwitterFeedApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TwitterfeedApplication.class, args);
+        SpringApplication.run(TwitterFeedApplication.class, args);
     }
 }
