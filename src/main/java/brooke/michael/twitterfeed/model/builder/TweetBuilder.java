@@ -2,7 +2,7 @@ package brooke.michael.twitterfeed.model.builder;
 
 import brooke.michael.twitterfeed.model.Tweet;
 import brooke.michael.twitterfeed.reader.TwitterFileReader;
-import brooke.michael.twitterfeed.set.UserMap;
+import brooke.michael.twitterfeed.map.UserMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class TweetBuilder {
         this.twitterFileReader = twitterFileReader;
     }
 
-    public void getTweets(UserMap users) {
+    public void addTweets(UserMap users) {
         List<String> strings = twitterFileReader.readFile(tweetsFilePath);
 
         strings.forEach(line -> {

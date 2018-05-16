@@ -2,7 +2,7 @@ package brooke.michael.twitterfeed.model.builder;
 
 import brooke.michael.twitterfeed.model.User;
 import brooke.michael.twitterfeed.reader.TwitterFileReader;
-import brooke.michael.twitterfeed.set.UserMap;
+import brooke.michael.twitterfeed.map.UserMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

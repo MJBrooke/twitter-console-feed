@@ -1,13 +1,11 @@
 package brooke.michael.twitterfeed.runner;
 
-import brooke.michael.twitterfeed.model.builder.TweetBuilder;
-import brooke.michael.twitterfeed.model.builder.UserBuilder;
-import brooke.michael.twitterfeed.set.UserMap;
+import brooke.michael.twitterfeed.service.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,16 +13,16 @@ import java.util.stream.Stream;
 @Component
 public class TwitterFeedCommandLineRunner implements CommandLineRunner {
 
-    @Autowired
-    private UserBuilder userBuilder;
+    private final TwitterUserService twitterUserService;
 
     @Autowired
-    private TweetBuilder tweetBuilder;
+    public TwitterFeedCommandLineRunner(TwitterUserService twitterUserService) {
+        this.twitterUserService = twitterUserService;
+    }
 
     @Override
     public void run(String... args) {
-        UserMap users = userBuilder.buildUsers();
-        tweetBuilder.getTweets(users);
+        var users = twitterUserService.getTwitterUsers();
 
         users.entrySet()
                 .forEach(user -> {

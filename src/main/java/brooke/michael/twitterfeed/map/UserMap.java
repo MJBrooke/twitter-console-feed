@@ -1,4 +1,4 @@
-package brooke.michael.twitterfeed.set;
+package brooke.michael.twitterfeed.map;
 
 import brooke.michael.twitterfeed.model.User;
 
