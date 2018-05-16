@@ -1,5 +1,6 @@
 package brooke.michael.twitterfeed.runner;
 
+import brooke.michael.twitterfeed.model.Tweet;
 import brooke.michael.twitterfeed.model.User;
 import brooke.michael.twitterfeed.set.UserMap;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,24 @@ public class TwitterFeedCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         UserMap users = getUsers();
-        System.out.println(users);
+        getTweets(users);
+
+        //TODO - if a follower doesn't exist, he must also be added
+
+        users.entrySet()
+                .forEach(user -> {
+                    System.out.println(user.getKey());
+
+                    Stream.concat(
+                            user.getValue().getTweets().stream(),
+                            user.getValue().getFollowing().stream()
+                                    //TODO - below breaks when follower doesn't exist as user in map
+                                    .map(userBeingFollowed -> users.get(userBeingFollowed).getTweets())
+                                    .flatMap(List::stream)
+                                    .collect(Collectors.toList()).stream()
+                    ).sorted()
+                            .forEach(tweet -> System.out.println("\t@" + tweet.getOwner() + ": " + tweet.getContent()));
+                });
     }
 
     private UserMap getUsers() throws IOException {
@@ -49,5 +67,24 @@ public class TwitterFeedCommandLineRunner implements CommandLineRunner {
         var following = tokens[1].split(", ");
 
         return new User(tokens[0], Arrays.stream(following).collect(Collectors.toSet()));
+    }
+
+    private void getTweets(UserMap users) throws IOException {
+        var path = Paths.get(tweetsFilePath);
+
+        //TODO - Check that the file exists before continuing - exception otherwise
+        Stream<String> lines = Files.lines(path);
+        lines.forEach(line -> {
+            Tweet tweet = buildTweet(line);
+            users.get(tweet.getOwner()).getTweets().add(tweet);
+        });
+        lines.close();
+    }
+
+    private Tweet buildTweet(String line) {
+        //TODO - REGEX check before continuing - exception if messed up
+        var tweetTokens = line.split("> ");
+
+        return new Tweet(tweetTokens[0], tweetTokens[1]);
     }
 }
