@@ -9,11 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 @Component
 public class TwitterFeedCommandLineRunner implements CommandLineRunner {
 
-    private final TwitterUserService twitterUserService;
+    private TwitterUserService twitterUserService;
 
     @Autowired
     public TwitterFeedCommandLineRunner(TwitterUserService twitterUserService) {
