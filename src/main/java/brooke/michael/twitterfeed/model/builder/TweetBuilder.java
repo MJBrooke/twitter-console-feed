@@ -25,7 +25,7 @@ public class TweetBuilder {
     }
 
     public UserMap addTweets(UserMap users) {
-        UserMap newUserMap = new UserMap(users);
+        var newUserMap = new UserMap(users);
 
         twitterFileReader.readFile(tweetsFilePath)
                 .forEach(line -> {

@@ -13,11 +13,11 @@ public class UserMap {
     public UserMap() {
         //We use a tree map because it is sorted according to the natural ordering of its keys.
         //In our case, we want the map to be sorted alphabetically by username, so it is a natural fit.
-        userMap = new TreeMap<>();
+        userMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     }
 
     public UserMap(UserMap otherUserMap) {
-        userMap = new TreeMap<>();
+        this();
         userMap.putAll(otherUserMap.userMap);
     }
 
@@ -31,7 +31,7 @@ public class UserMap {
     }
 
     public Set<Map.Entry<String, User>> entrySet() {
-        return new TreeMap<>(userMap).entrySet();
+        return userMap.entrySet();
     }
 
     private void addUpdateUser(User newUser) {
