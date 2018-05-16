@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-//TODO - create abstraction for this for the Dependency Inversion principle
-//TODO - make this a component?
 public class UserMap {
 
     private Map<String, User> userMap;
@@ -18,7 +16,25 @@ public class UserMap {
         userMap = new TreeMap<>();
     }
 
+    public UserMap(UserMap otherUserMap) {
+        userMap = new TreeMap<>();
+        userMap.putAll(otherUserMap.userMap);
+    }
+
     public void put(User newUser) {
+        addUpdateUser(newUser);
+        addUsersBeingFollowed(newUser);
+    }
+
+    public User get(String username) {
+        return userMap.get(username);
+    }
+
+    public Set<Map.Entry<String, User>> entrySet() {
+        return new TreeMap<>(userMap).entrySet();
+    }
+
+    private void addUpdateUser(User newUser) {
         User retrievedUser = get(newUser);
 
         if(retrievedUser == null) {
@@ -26,20 +42,14 @@ public class UserMap {
         } else {
             retrievedUser.addFollowing(newUser.getFollowing());
         }
+    }
 
+    private void addUsersBeingFollowed(User newUser) {
         newUser.getFollowing().forEach(followedUser -> {
             if(get(followedUser) == null) {
                 userMap.put(followedUser, new User(followedUser));
             }
         });
-    }
-
-    public Set<Map.Entry<String, User>> entrySet() {
-        return new TreeMap<>(userMap).entrySet();
-    }
-
-    public User get(String username) {
-        return userMap.get(username);
     }
 
     private User get(User user) {

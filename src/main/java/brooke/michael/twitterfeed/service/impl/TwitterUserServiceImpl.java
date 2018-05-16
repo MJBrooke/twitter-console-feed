@@ -20,8 +20,6 @@ public class TwitterUserServiceImpl implements TwitterUserService {
     }
 
     public UserMap getTwitterUsers() {
-        UserMap users = userBuilder.buildUsers();
-        tweetBuilder.addTweets(users);
-        return users;
+        return tweetBuilder.addTweets(userBuilder.buildUsers());
     }
 }

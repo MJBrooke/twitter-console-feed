@@ -1,5 +1,6 @@
 package brooke.michael.twitterfeed.model.builder;
 
+import brooke.michael.twitterfeed.exception.InvalidFileLineFormatException;
 import brooke.michael.twitterfeed.model.Tweet;
 import brooke.michael.twitterfeed.reader.TwitterFileReader;
 import brooke.michael.twitterfeed.map.UserMap;
@@ -7,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-//TODO - make an interface
 public class TweetBuilder {
 
+    private static final String TWEET_LINE_VALIDATION_REGEX = "(\\w+)> (.){1,140}";
     private static final String OWNER_CONTENTS_DELIMITER = "> ";
 
     @Value("${tweets}")
@@ -25,17 +24,23 @@ public class TweetBuilder {
         this.twitterFileReader = twitterFileReader;
     }
 
-    public void addTweets(UserMap users) {
-        List<String> strings = twitterFileReader.readFile(tweetsFilePath);
+    public UserMap addTweets(UserMap users) {
+        UserMap newUserMap = new UserMap(users);
 
-        strings.forEach(line -> {
-            Tweet tweet = buildTweet(line);
-            users.get(tweet.getOwner()).addTweet(tweet);
-        });
+        twitterFileReader.readFile(tweetsFilePath)
+                .forEach(line -> {
+                    Tweet tweet = buildTweet(line);
+                    newUserMap.get(tweet.getOwner()).addTweet(tweet);
+                });
+
+        return newUserMap;
     }
 
     private Tweet buildTweet(String line) {
-        //TODO - REGEX check before continuing - exception if messed up
+        if(!line.matches(TWEET_LINE_VALIDATION_REGEX)) {
+            throw new InvalidFileLineFormatException("Invalid line in the Tweets file: '" + line + "'");
+        }
+
         var tweetTokens = line.split(OWNER_CONTENTS_DELIMITER);
 
         return new Tweet(tweetTokens[0], tweetTokens[1]);
