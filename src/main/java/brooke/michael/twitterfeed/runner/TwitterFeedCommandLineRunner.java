@@ -76,7 +76,7 @@ public class TwitterFeedCommandLineRunner implements CommandLineRunner {
         Stream<String> lines = Files.lines(path);
         lines.forEach(line -> {
             Tweet tweet = buildTweet(line);
-            users.get(tweet.getOwner()).getTweets().add(tweet);
+            users.get(tweet.getOwner()).addTweet(tweet);
         });
         lines.close();
     }

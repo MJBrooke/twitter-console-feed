@@ -24,7 +24,7 @@ public class UserMap {
         if(retrievedUser == null) {
             userMap.put(newUser.getUsername(), newUser);
         } else {
-            retrievedUser.getFollowing().addAll(newUser.getFollowing());
+            retrievedUser.addFollowing(newUser.getFollowing());
         }
 
         newUser.getFollowing().forEach(followedUser -> {
@@ -35,7 +35,7 @@ public class UserMap {
     }
 
     public Set<Map.Entry<String, User>> entrySet() {
-        return userMap.entrySet();
+        return new TreeMap<>(userMap).entrySet();
     }
 
     public User get(String username) {

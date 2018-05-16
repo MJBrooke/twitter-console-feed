@@ -4,9 +4,9 @@ public class Tweet implements Comparable<Tweet> {
 
     private static long currentTimestamp = 1;
 
-    private long timestamp;
-    private String owner;
-    private String content;
+    private final long timestamp;
+    private final String owner;
+    private final String content;
 
     public Tweet(String owner, String content) {
         this.timestamp = currentTimestamp++;
