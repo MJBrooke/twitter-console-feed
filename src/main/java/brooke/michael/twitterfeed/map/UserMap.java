@@ -30,4 +30,10 @@ public interface UserMap {
      * @return The Map's entry set
      */
     Set<Map.Entry<String, User>> entrySet();
+
+    /**
+     * Returns the size of the array
+     * @return The size of the array
+     */
+    int size();
 }

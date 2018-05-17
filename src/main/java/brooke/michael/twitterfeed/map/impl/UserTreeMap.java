@@ -53,6 +53,11 @@ public class UserTreeMap implements UserMap {
     }
 
     @Override
+    public int size() {
+        return userMap.size();
+    }
+
+    @Override
     public String toString() {
         return "UserTreeMap{" +
                 "userMap=" + userMap +

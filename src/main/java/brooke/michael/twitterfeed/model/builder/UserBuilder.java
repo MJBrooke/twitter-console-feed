@@ -38,6 +38,7 @@ public class UserBuilder {
         return users;
     }
 
+    //TODO - split this out
     private User buildUser(String line) {
         if(!line.matches(USER_LINE_VALIDATION_REGEX)) {
             throw new InvalidFileLineFormatException("Invalid line in the User file: '" + line + "'");
