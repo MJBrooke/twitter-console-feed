@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Repository
-public class TwitterTextFileReaderImpl implements TwitterFileReader {
+public class TwitterTextFileReader implements TwitterFileReader {
 
     public List<String> readFile(String path) {
         try {

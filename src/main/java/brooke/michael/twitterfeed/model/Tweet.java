@@ -2,6 +2,7 @@ package brooke.michael.twitterfeed.model;
 
 public class Tweet implements Comparable<Tweet> {
 
+    //Since no timestamps are given, we will simulate it for each new Tweet
     private static long currentTimestamp = 1;
 
     private final long timestamp;

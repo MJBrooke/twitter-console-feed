@@ -1,9 +1,9 @@
 package brooke.michael.twitterfeed.model.builder;
 
 import brooke.michael.twitterfeed.exception.InvalidFileLineFormatException;
+import brooke.michael.twitterfeed.map.UserMap;
 import brooke.michael.twitterfeed.model.Tweet;
 import brooke.michael.twitterfeed.reader.TwitterFileReader;
-import brooke.michael.twitterfeed.map.UserMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,15 +25,13 @@ public class TweetBuilder {
     }
 
     public UserMap addTweets(UserMap users) {
-        var newUserMap = new UserMap(users);
-
         twitterFileReader.readFile(tweetsFilePath)
                 .forEach(line -> {
                     Tweet tweet = buildTweet(line);
-                    newUserMap.get(tweet.getOwner()).addTweet(tweet);
+                    users.get(tweet.getOwner()).addTweet(tweet);
                 });
 
-        return newUserMap;
+        return users;
     }
 
     private Tweet buildTweet(String line) {
