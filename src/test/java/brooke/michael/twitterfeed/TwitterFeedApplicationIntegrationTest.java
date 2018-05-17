@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest({"users=C:/Users/my_user/user.txt", "tweets=C:/Users/my_user/tweet.txt"})
-public class TwitterFeedApplicationIntegrationTests {
+public class TwitterFeedApplicationIntegrationTest {
 
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 

@@ -18,13 +18,13 @@ public class TwitterFeedApplication implements CommandLineRunner {
         this.twitterFeedOutputFormatter = twitterFeedOutputFormatter;
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(TwitterFeedApplication.class, args);
-    }
-
     @Override
     public void run(String... args) {
         UserMap users = twitterUserService.getTwitterUsers();
         System.out.println(twitterFeedOutputFormatter.formatTwitterFeedOutputString(users));
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(TwitterFeedApplication.class, args);
     }
 }
