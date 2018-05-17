@@ -1,9 +1,6 @@
-package brooke.michael.twitterfeed.runner;
+package brooke.michael.twitterfeed.output.formatter;
 
 import brooke.michael.twitterfeed.map.UserMap;
-import brooke.michael.twitterfeed.service.TwitterUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,20 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class TwitterFeedCommandLineRunner implements CommandLineRunner {
+public class TwitterFeedOutputFormatter {
 
-    private TwitterUserService twitterUserService;
-
-    @Autowired
-    public TwitterFeedCommandLineRunner(TwitterUserService twitterUserService) {
-        this.twitterUserService = twitterUserService;
-    }
-
-    @Override
-    public void run(String... args) {
-        UserMap users = twitterUserService.getTwitterUsers();
-
-        String output = users.entrySet().stream()
+    public String formatTwitterFeedOutputString(UserMap users) {
+        return users.entrySet().stream()
                 .map(user -> user.getKey() + System.lineSeparator() +
                         Stream.concat(
                                 user.getValue().getTweets().stream(),
@@ -36,7 +23,5 @@ public class TwitterFeedCommandLineRunner implements CommandLineRunner {
                                 .map(tweet -> "\t@" + tweet.getOwner() + ": " + tweet.getContent() + System.lineSeparator())
                                 .reduce("", String::concat))
                 .reduce("", String::concat);
-
-        System.out.print(output);
     }
 }
