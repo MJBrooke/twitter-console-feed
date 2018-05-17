@@ -31,7 +31,7 @@ public class TweetServiceImplTest {
     private TweetBuilder tweetBuilder;
 
     @InjectMocks
-    private TweetService tweetService;
+    private TweetServiceImpl tweetService;
 
     @Before
     public void before() {

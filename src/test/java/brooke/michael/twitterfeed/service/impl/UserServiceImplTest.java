@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-public class UserServiceTest {
+public class UserServiceImplTest {
 
     @Mock
     private TwitterTextFileReader twitterTextFileReader;
@@ -29,7 +29,7 @@ public class UserServiceTest {
     private UserBuilder userBuilder;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Before
     public void before() {
