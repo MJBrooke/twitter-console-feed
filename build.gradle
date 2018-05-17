@@ -14,6 +14,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "jacoco"
 
 group = 'brooke.michael'
 version = '0.0.1-SNAPSHOT'
@@ -28,3 +29,30 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+jacoco {
+    toolVersion = "0.8.1"
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                maximum = 0.8
+            }
+
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                maximum = 0.8
+            }
+
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification

@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 //TODO - provide files in local test resources
 
 @RunWith(SpringRunner.class)
-@SpringBootTest({"users=C:/Users/201377881/Documents/Allan Gray/user.txt", "tweets=seh"})
+@SpringBootTest({"users=C:/Users/201377881/Documents/Allan Gray/user.txt", "tweets=C:/Users/201377881/Documents/Allan Gray/tweet.txt"})
 public class TwitterFeedApplicationTests {
 
     @Test
