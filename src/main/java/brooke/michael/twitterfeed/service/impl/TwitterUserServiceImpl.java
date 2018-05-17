@@ -1,8 +1,6 @@
 package brooke.michael.twitterfeed.service.impl;
 
 import brooke.michael.twitterfeed.map.UserMap;
-import brooke.michael.twitterfeed.model.builder.TweetBuilder;
-import brooke.michael.twitterfeed.model.builder.UserBuilder;
 import brooke.michael.twitterfeed.service.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,16 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class TwitterUserServiceImpl implements TwitterUserService {
 
-    private UserBuilder userBuilder;
-    private TweetBuilder tweetBuilder;
+    private UserService userService;
+    private TweetService tweetService;
 
     @Autowired
-    public TwitterUserServiceImpl(UserBuilder userBuilder, TweetBuilder tweetBuilder) {
-        this.userBuilder = userBuilder;
-        this.tweetBuilder = tweetBuilder;
+    public TwitterUserServiceImpl(UserService userService, TweetService tweetService) {
+        this.userService = userService;
+        this.tweetService = tweetService;
     }
 
     public UserMap getTwitterUsers() {
-        return tweetBuilder.addTweets(userBuilder.buildUsers());
+        return tweetService.getTweets(userService.getUsers());
     }
 }
