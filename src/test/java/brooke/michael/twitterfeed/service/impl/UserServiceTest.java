@@ -3,6 +3,7 @@ package brooke.michael.twitterfeed.service.impl;
 import brooke.michael.twitterfeed.map.UserMap;
 import brooke.michael.twitterfeed.model.builder.UserBuilder;
 import brooke.michael.twitterfeed.reader.impl.TwitterTextFileReader;
+import brooke.michael.twitterfeed.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

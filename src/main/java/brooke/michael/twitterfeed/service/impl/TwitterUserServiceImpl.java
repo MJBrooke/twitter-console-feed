@@ -1,7 +1,9 @@
 package brooke.michael.twitterfeed.service.impl;
 
 import brooke.michael.twitterfeed.map.UserMap;
+import brooke.michael.twitterfeed.service.TweetService;
 import brooke.michael.twitterfeed.service.TwitterUserService;
+import brooke.michael.twitterfeed.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

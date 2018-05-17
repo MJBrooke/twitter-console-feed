@@ -5,6 +5,7 @@ import brooke.michael.twitterfeed.map.impl.UserTreeMap;
 import brooke.michael.twitterfeed.model.User;
 import brooke.michael.twitterfeed.model.builder.TweetBuilder;
 import brooke.michael.twitterfeed.reader.impl.TwitterTextFileReader;
+import brooke.michael.twitterfeed.service.TweetService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-public class TweetServiceTest {
+public class TweetServiceImplTest {
 
     @Mock
     private TwitterTextFileReader twitterTextFileReader;
