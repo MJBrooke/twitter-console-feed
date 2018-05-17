@@ -24,18 +24,19 @@ public class TwitterFeedCommandLineRunner implements CommandLineRunner {
     public void run(String... args) {
         UserMap users = twitterUserService.getTwitterUsers();
 
-        users.entrySet()
-                .forEach(user -> {
-                    System.out.println(user.getKey());
+        String output = users.entrySet().stream()
+                .map(user -> user.getKey() + System.lineSeparator() +
+                        Stream.concat(
+                                user.getValue().getTweets().stream(),
+                                user.getValue().getFollowing().stream()
+                                        .map(userBeingFollowed -> users.get(userBeingFollowed).getTweets())
+                                        .flatMap(List::stream)
+                                        .collect(Collectors.toList()).stream()
+                        ).sorted()
+                                .map(tweet -> "\t@" + tweet.getOwner() + ": " + tweet.getContent() + System.lineSeparator())
+                                .reduce("", String::concat))
+                .reduce("", String::concat);
 
-                    Stream.concat(
-                            user.getValue().getTweets().stream(),
-                            user.getValue().getFollowing().stream()
-                                    .map(userBeingFollowed -> users.get(userBeingFollowed).getTweets())
-                                    .flatMap(List::stream)
-                                    .collect(Collectors.toList()).stream()
-                    ).sorted()
-                            .forEach(tweet -> System.out.println("\t@" + tweet.getOwner() + ": " + tweet.getContent()));
-                });
+        System.out.print(output);
     }
 }

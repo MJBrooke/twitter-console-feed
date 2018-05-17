@@ -31,27 +31,27 @@ public class TweetBuilderTest {
     }
 
     @Test(expected = InvalidFileLineFormatException.class)
-    public void buildTweetfailure_lineDoesNotMatchTweetRegex_spaceAfterOwner() {
+    public void buildTweet_failure_lineDoesNotMatchTweetRegex_spaceAfterOwner() {
         tweetBuilder.buildTweet("Alan > This is a malformed line");
     }
 
     @Test(expected = InvalidFileLineFormatException.class)
-    public void buildTweetfailure_lineDoesNotMatchTweetRegex_noSpaceAfterGreaterThan() {
+    public void buildTweet_failure_lineDoesNotMatchTweetRegex_noSpaceAfterGreaterThan() {
         tweetBuilder.buildTweet("Alan>This is a malformed line");
     }
 
     @Test(expected = InvalidFileLineFormatException.class)
-    public void buildTweetfailure_lineDoesNotMatchTweetRegex_noOwner() {
+    public void buildTweet_failure_lineDoesNotMatchTweetRegex_noOwner() {
         tweetBuilder.buildTweet("> This is a malformed line");
     }
 
     @Test(expected = InvalidFileLineFormatException.class)
-    public void buildTweetfailure_lineDoesNotMatchTweetRegex_noTweet() {
+    public void buildTweet_failure_lineDoesNotMatchTweetRegex_noTweet() {
         tweetBuilder.buildTweet("Alan>");
     }
 
     @Test(expected = InvalidFileLineFormatException.class)
-    public void buildTweetfailure_lineDoesNotMatchTweetRegex_tweetGreaterThan140Characters() {
+    public void buildTweet_failure_lineDoesNotMatchTweetRegex_tweetGreaterThan140Characters() {
         tweetBuilder.buildTweet("Alan> This is a tweet that has exactly 142 characters in it which makes it not match the tweet regex and it therefore throws this error when invoked");
     }
 }

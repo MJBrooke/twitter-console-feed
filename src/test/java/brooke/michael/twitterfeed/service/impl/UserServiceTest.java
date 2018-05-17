@@ -36,7 +36,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void buildUsers_success() {
+    public void getUsers() {
         //Given the following valid lines representing users and the users they follow
         when(twitterTextFileReader.readFile(anyString())).thenReturn(Arrays.asList(
                 "Ward follows Alan",

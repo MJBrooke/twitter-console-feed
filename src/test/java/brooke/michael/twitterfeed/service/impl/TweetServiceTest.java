@@ -38,7 +38,7 @@ public class TweetServiceTest {
     }
 
     @Test
-    public void addTweets_success() {
+    public void getTweets() {
         //Given we have a map of the following 2 users
         UserMap userMap = new UserTreeMap();
         userMap.put(new User("Alan"));
