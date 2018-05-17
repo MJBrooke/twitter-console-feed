@@ -1,5 +1,6 @@
 package brooke.michael.twitterfeed.runner;
 
+import brooke.michael.twitterfeed.map.UserMap;
 import brooke.michael.twitterfeed.service.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ public class TwitterFeedCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        var users = twitterUserService.getTwitterUsers();
+        UserMap users = twitterUserService.getTwitterUsers();
 
         users.entrySet()
                 .forEach(user -> {

@@ -39,7 +39,7 @@ public class TweetBuilder {
             throw new InvalidFileLineFormatException("Invalid line in the Tweets file: '" + line + "'");
         }
 
-        var tweetTokens = line.split(OWNER_CONTENTS_DELIMITER);
+        String[] tweetTokens = line.split(OWNER_CONTENTS_DELIMITER);
 
         return new Tweet(tweetTokens[0], tweetTokens[1]);
     }

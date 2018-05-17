@@ -30,7 +30,7 @@ public class UserBuilder {
     }
 
     public UserMap buildUsers() {
-        var users = new UserTreeMap();
+        UserMap users = new UserTreeMap();
 
         twitterFileReader.readFile(usersFilePath)
                 .forEach(line -> users.put(buildUser(line)));
@@ -43,9 +43,9 @@ public class UserBuilder {
             throw new InvalidFileLineFormatException("Invalid line in the User file: '" + line + "'");
         }
 
-        var tokens = line.split(MEMBER_FOLLOWS_SPLIT_DELIMITER);
+        String[] tokens = line.split(MEMBER_FOLLOWS_SPLIT_DELIMITER);
 
-        var following = tokens[1].split(FOLLOWS_LIST_DELIMITER);
+        String[] following = tokens[1].split(FOLLOWS_LIST_DELIMITER);
 
         return new User(tokens[0], Arrays.stream(following).collect(Collectors.toSet()));
     }

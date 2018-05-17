@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.0.2.RELEASE'
+        powerMockVersion = '1.7.4'
     }
     repositories {
         mavenCentral()
@@ -18,7 +19,8 @@ apply plugin: "jacoco"
 
 group = 'brooke.michael'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 10
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -28,6 +30,10 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+//    TODO - user variables here
+    testCompile('org.mockito:mockito-core:2.8.9')
+    testCompile('org.powermock:powermock-module-junit4:1.7.4')
+    testCompile('org.powermock:powermock-api-mockito2:1.7.4')
 }
 
 jacoco {
