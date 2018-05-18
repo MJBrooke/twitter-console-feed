@@ -33,6 +33,7 @@ public class TwitterFeedApplication implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
+        System.err.close();
         new SpringApplicationBuilder(TwitterFeedApplication.class)
                 .logStartupInfo(false)
                 .bannerMode(Banner.Mode.OFF)
